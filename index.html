@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz App</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <div id="main-container">
+      <h1>Welcome to Online Quiz App.</h1>
+      <div id="inner-container">
+        <div id="create-container">
+          <p>
+            🎉 Get ready to challenge your brain! Can you ace this quiz? Let's
+            find out! 🔥 Think you're a genius? Prove it! Take this quiz and
+            test your knowledge! 🤔 Only 1% of people can get a perfect score.
+            Are you one of them? ⚡ Fasten your seatbelt! This quiz is going to
+            be a rollercoaster of fun and knowledge! 🏆 Compete, learn, and win!
+            Score high and show off your skills! 🚀 Are you ready for the
+            ultimate challenge? Let’s GO!
+          </p>
+          <button id="create" title="Add Your own quiz">Add</button>
+        </div>
+        <div id="take-container">
+          <p>
+            🛠️ Unleash your creativity! Create a quiz and challenge the world!
+            📜 Got a topic in mind? Turn it into an epic quiz in just a few
+            clicks! 🤯 Make a quiz that blows minds! Add questions, set answers,
+            and let the fun begin! ⚡ Create. Share. Challenge. Watch your quiz
+            go viral! 🏆 Your quiz, your rules! Design the ultimate test for
+            your friends and followers! 🎨 Mix fun with learning—create a quiz
+            that everyone will love!
+          </p>
+          <button id="take-quiz">take a quiz</button>
+        </div>
+      </div>
+    </div>
+    <div class="form">
+      <i class="fa fa-close"></i>
+    </div>
+  </body>
+  <script>
+    // async function fetchData() {
+    //   try {
+    //     const response = await fetch(
+    //       "https://quizapi.io/api/v1/questions?apiKey=NFbXqVAcMrioUysvqBpFNWQpdVMNSFS1t1NHTvL6&limit=5"
+    //     );
+
+    //     if (!response.ok) {
+    //       throw new Error(`HTTP error! Status: ${response.status}`);
+    //     }
+
+    //     const data = await response.json(); // Convert to JSON
+    //     console.log(data[0].id);
+    //   } catch (error) {
+    //     console.error("Error fetching data:", error);
+    //   }
+    // }
+
+    // fetchData();
+    // const innerContainer = document.getElementsByTagName("body");
+    const addBtnt = document.getElementById("create");
+    const takeAQuizBtn = document.getElementById("take-quiz");
+    const formClass = document.querySelector(".form");
+    // take question and answers from user and add into an object to show in take-a-quiz portion
+    // function formForAdd() {
+    //   return
+    // }
+    function handleClickBtn(e) {
+      const event = e.target;
+      if (event.id === "create") {
+        formClass.classList.add("form-class");
+        // formForAdd();
+        console.log("create");
+      } else if (event.id === "take-quiz") {
+        console.log("take-quiz");
+      } else if (event.className === "fa fa-close") {
+        formClass.classList.remove("form-class");
+      }
+      console.log(e.target.className);
+    }
+    // events
+    document.body.addEventListener("click", handleClickBtn);
+  </script>
+</html>
