@@ -67,7 +67,13 @@ body {
 }
 
 /* form */
-.form {
+/* .form,
+.quiz-container, */
+.fa-close {
+  /* height: 0;
+  margin: 0;
+  padding: 0;
+  top: 0; */
   visibility: hidden;
 }
 .form-class {
@@ -76,15 +82,13 @@ body {
   height: 100vh;
   visibility: visible;
   position: relative;
-  /* z-index: -1; */
-  /* position: absolute; */
+  pointer-events: none;
+  cursor: alias;
 }
-.fa-close {
-  font-size: 38px;
-  margin: 40px;
-  left: 90%;
-  position: relative;
-  color: darkred;
-  cursor: pointer;
-  pointer-events: all;
-}
+/* .fa-close {
+    visibility: hidden;
+} */
+/* take-quiz */
+/* .quiz-container {
+  visibility: hidden;
+} */
