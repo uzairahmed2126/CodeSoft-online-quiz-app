@@ -58,7 +58,6 @@ function showQuestions(dataLength, values) {
 function popUpForScore() {
   closeBtn.style.zIndex = "1";
   popUp.style.visibility = "visible";
-  popUp.classList.add("pop-up-close-btn");
   popUp.innerHTML = `${
     score <= 30
       ? `<h1 style="color:red;">Score :${score}</h1>`
@@ -115,6 +114,7 @@ function handleClickBtn(e) {
     counter();
     nexQuestion();
   }
+  console.log("btn");
 }
 fetchData();
 // events

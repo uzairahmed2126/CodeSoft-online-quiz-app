@@ -9,7 +9,7 @@ body {
   font-family: "Courier New", Courier, monospace;
   text-transform: capitalize;
   pointer-events: none;
-  /* overflow: hidden; */
+  overflow: hidden;
 }
 #main-container {
   display: flex;
@@ -45,7 +45,7 @@ body {
 }
 #create-container:hover,
 #take-container:hover {
-  transform: scale(1.05);
+  /* transform: scale(1.05); */
   box-shadow: 0px 0px 10px white;
 }
 #create-take {
@@ -76,44 +76,41 @@ body {
 /* form */
 
 .form-class {
-  top: -92%;
+  top: -86.3%;
   background: #2c5364;
-  height: 100vh;
+  height: 100%;
   visibility: visible;
   position: relative;
   pointer-events: none;
-  box-shadow: 1px 2px 5px 10px beige;
 }
 .fa-close {
   visibility: hidden;
-  /* box-shadow: 1px 2px 5px 10px beige; */
   background: white;
   color: red;
 }
 /* take-quiz */
-/* .quiz-container {
-  visibility: visible;
-} */
 
 #question-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
   text-align: center;
   color: white;
-  margin-top: 25vh;
   border-radius: 50px;
   justify-content: center;
+  place-content: center;
   visibility: hidden;
   position: absolute;
-  top: -5%;
-  left: 15%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 100%;
+  width: 100%;
+  max-height: 70%;
+  max-width: 60%;
   background-color: dimgray;
   padding: 10px;
 }
 .inner-question-container {
-  /* border-radius: 50px; */
-
   display: flex;
   align-items: center;
   text-align: justify;
@@ -121,7 +118,6 @@ body {
   margin: 10px;
   font-size: 15px;
   padding: 10px;
-  /* flex-direction: column; */
 }
 .option {
   place-content: center;
@@ -157,21 +153,12 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: rgba(0, 0, 0, 0.836);
   height: 100%;
   width: 100%;
+  background: rgba(0, 0, 0, 0.836);
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* Optional: Shadow effect */
   text-align: center; /* Center the text */
   place-content: center;
   pointer-events: all;
   visibility: hidden;
 }
-/* .pop-up-close-btn  {
-  top: 92%;
-  background: #2c5364;
-  height: 100vh;
-  visibility: visible;
-  position: absolute;
-  pointer-events: none;
-  cursor: pointer; 
-} */
