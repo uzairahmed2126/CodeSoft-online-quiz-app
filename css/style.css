@@ -16,6 +16,7 @@ body {
   flex-direction: column;
   justify-content: center;
   text-align: center;
+  align-items: center;
 }
 #main-container h1 {
   margin: 40px;
@@ -35,14 +36,17 @@ body {
   flex-direction: column;
   align-items: center;
   font-size: 20px;
-  background: transparent;
-  text-align: justify;
-  outline: #2c5364 1px solid;
-  margin-left: 50px;
-  margin-right: 50px;
+  background: rgba(255, 255, 255, 0.1);
+  text-align: center;
+  border: 2px solid white;
   border-radius: 10px;
-  box-shadow: 1px 1px 1px 2px;
   padding: 20px;
+  transition: all 0.3s ease-in-out;
+}
+#create-container:hover,
+#take-container:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 0px 10px white;
 }
 #create-take {
   grid-column: 3/3;
@@ -53,30 +57,24 @@ body {
   pointer-events: all;
   text-align: center;
   border: none;
-  background-color: transparent;
+  /* background-color: none; */
   box-shadow: 1px 1px 1px 2px;
-  outline: #2c5364 1px solid;
-  padding: 10px 30px 10px 30px;
-  color: white;
+  outline: white 2px solid;
+  padding: 12px 40px;
+  color: black;
   border-radius: 10px;
   font-weight: bold;
+  transition: all 0.3s ease;
   text-transform: capitalize;
   &:hover {
-    background-color: #2c5364;
+    background-color: white;
+    color: #203a43;
     cursor: pointer;
   }
 }
 
 /* form */
-/* .form,
-.quiz-container, */
-.fa-close {
-  /* height: 0;
-  margin: 0;
-  padding: 0;
-  top: 0; */
-  visibility: hidden;
-}
+
 .form-class {
   top: -92%;
   background: #2c5364;
@@ -84,11 +82,14 @@ body {
   visibility: visible;
   position: relative;
   pointer-events: none;
-  cursor: alias;
+  box-shadow: 1px 2px 5px 10px beige;
 }
-/* .fa-close {
-    visibility: hidden;
-} */
+.fa-close {
+  visibility: hidden;
+  /* box-shadow: 1px 2px 5px 10px beige; */
+  background: white;
+  color: red;
+}
 /* take-quiz */
 /* .quiz-container {
   visibility: visible;
@@ -107,6 +108,8 @@ body {
   position: absolute;
   top: -5%;
   left: 15%;
+  background-color: dimgray;
+  padding: 10px;
 }
 .inner-question-container {
   /* border-radius: 50px; */
@@ -122,23 +125,20 @@ body {
 }
 .option {
   place-content: center;
-  background: grey;
   border-radius: 50%;
   height: 50px;
   width: 50px;
   align-items: center;
   text-align: center;
   margin: 5px;
-  pointer-events: all;
-
-  &:hover {
-    background: rgba(128, 128, 128, 0.89);
-    color: lightgreen;
-    font-weight: bold;
-    cursor: pointer;
-  }
+  font-size: 20px;
+  outline: 1px solid white;
+  /* box-shadow: 1px 2px 34px 1px black; */
+  background: rgba(17, 0, 0, 0.89);
+  color: lightgreen;
 }
 .question-p {
+  border-radius: 20px;
   text-align: justify;
   pointer-events: all;
   background: rgb(37, 24, 24);
@@ -146,9 +146,32 @@ body {
   width: 100%;
   max-width: 800px;
   &:hover {
-    background: rgba(128, 128, 128, 0.89);
-    color: lightgreen;
+    /* color: darkred; */
     font-weight: bold;
     cursor: pointer;
   }
 }
+/* pop up */
+#pop-up {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.836);
+  height: 100%;
+  width: 100%;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* Optional: Shadow effect */
+  text-align: center; /* Center the text */
+  place-content: center;
+  pointer-events: all;
+  visibility: hidden;
+}
+/* .pop-up-close-btn  {
+  top: 92%;
+  background: #2c5364;
+  height: 100vh;
+  visibility: visible;
+  position: absolute;
+  pointer-events: none;
+  cursor: pointer; 
+} */
