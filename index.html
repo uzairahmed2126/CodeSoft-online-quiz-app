@@ -8,34 +8,18 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
-    <link rel="stylesheet" href="./css/style.css" />
+    <!-- <link rel="stylesheet" href="./css/style.css" /> -->
+    <link rel="stylesheet" href="./css/new.css" />
+    <!-- <link rel="stylesheet" href="./css/gpt.css"> -->
   </head>
   <body>
     <div id="main-container">
       <h1>Welcome to Online Quiz App.</h1>
       <div id="inner-container">
         <div id="create-container">
-          <p>
-            🎉 Get ready to challenge your brain! Can you ace this quiz? Let's
-            find out! 🔥 Think you're a genius? Prove it! Take this quiz and
-            test your knowledge! 🤔 Only 1% of people can get a perfect score.
-            Are you one of them? ⚡ Fasten your seatbelt! This quiz is going to
-            be a rollercoaster of fun and knowledge! 🏆 Compete, learn, and win!
-            Score high and show off your skills! 🚀 Are you ready for the
-            ultimate challenge? Let’s GO!
-          </p>
           <button id="create" title="Add Your own quiz">Add</button>
         </div>
         <div id="take-container">
-          <p>
-            🛠️ Unleash your creativity! Create a quiz and challenge the world!
-            📜 Got a topic in mind? Turn it into an epic quiz in just a few
-            clicks! 🤯 Make a quiz that blows minds! Add questions, set answers,
-            and let the fun begin! ⚡ Create. Share. Challenge. Watch your quiz
-            go viral! 🏆 Your quiz, your rules! Design the ultimate test for
-            your friends and followers! 🎨 Mix fun with learning—create a quiz
-            that everyone will love!
-          </p>
           <button id="take-quiz">take a quiz</button>
         </div>
       </div>
@@ -45,12 +29,34 @@
     </div>
     <div class="quiz-container">
       <i class="fa fa-close"></i>
-      <div id="question-container">
-        
-      </div>
+      <div id="question-container"></div>
     </div>
     <div id="pop-up">
       <i class="fa fa-close"></i>
+    </div>
+    <div id="add-obj" class="object">
+      <form id="add-obj-form">
+        <input
+          id="get-question"
+          type="text"
+          placeholder="Enter Question"
+          required
+        />
+        <input id="opt-a" type="text" placeholder="Enter Option A" required />
+        <input id="opt-b" type="text" placeholder="Enter Option B" required />
+        <input id="opt-c" type="text" placeholder="Enter Option C" required />
+        <input id="opt-d" type="text" placeholder="Enter Option D" required />
+        <input
+          id="correct-opt"
+          type="text"
+          placeholder="Enter Correct Option a,b,c,d"
+          maxlength="1"
+          pattern="[A-Za-z]"
+          title="Enter only one letter"
+          required
+        />
+        <input id="submit" type="submit" value="Add" />
+      </form>
     </div>
   </body>
   <script src="./js/app.js"></script>

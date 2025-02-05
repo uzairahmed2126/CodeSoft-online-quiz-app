@@ -6,7 +6,7 @@
 body {
   text-transform: capitalize;
   pointer-events: none;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 #main-container {
   height: 100vh;
@@ -17,7 +17,7 @@ body {
   justify-content: center;
   text-align: center;
   align-items: center;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 #main-container h1 {
   font-size: 50px;
@@ -29,7 +29,6 @@ body {
   gap: 50px;
   color: white;
 }
-
 #create-container,
 #take-container {
   display: flex;
@@ -48,11 +47,6 @@ body {
   /* transform: scale(1.05); */
   box-shadow: 0px 0px 10px white;
 }
-#create-take {
-  grid-column: 3/3;
-  grid-row: 3/2;
-}
-
 #create,
 #take-quiz {
   width: 150px;
@@ -78,7 +72,6 @@ body {
     text-overflow: clip;
   }
 }
-
 /* form */
 .fa-close {
   cursor: pointer;
@@ -89,40 +82,65 @@ body {
 }
 
 .form-class {
-  top: -86.3%;
-  background: #2c5364;
+  position: absolute;
+  top: 0%;
   height: 100%;
+  background: #2c5364;
   width: 100%;
-  visibility: visible;
-  position: relative;
   pointer-events: none;
+}
+#questions {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.question {
+  height: 50px;
+  width: 100%;
+  align-items: center;
+  place-content: center;
+  /* width: 100%;
+  max-width: 500px; */
 }
 /* take-quiz */
 .quiz-container {
+  background-color: dimgray;
   pointer-events: none;
 }
 #question-container {
-  /* overflow: hidden; */
-  /* flex-direction: column;
-  text-align: center;
-  color: white;
-  border-radius: 50px;
-  justify-content: center;
-  place-content: center;
-  visibility: hidden;
-  
-  background-color: dimgray;
-  padding: 10px;
-  pointer-events: none; */
-  display: grid;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: gray;
+  height: 500px;
+  width: 500px;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  color: white;
+  text-align: center;
+  border-radius: 50px;
   height: 100%;
   width: 100%;
-  max-height: 70%;
+  max-height: 80%;
   max-width: 60%;
+  visibility: hidden;
+  /* 
+  /* overflow: hidden; */
+  /* flex-direction: column;
+  justify-content: center;
+  place-content: center;
+  
+  background-color: dimgray;
+  padding: 10px;
+  pointer-events: none; */
+  /* display: grid;
+  position: absolute; */
+  /* top: 50%;
+  
+   */
 }
 
 .inner-question-container {
@@ -135,6 +153,7 @@ body {
   padding: 10px;
   pointer-events: none;
 }
+
 .option {
   place-content: center;
   border-radius: 50%;
@@ -150,13 +169,15 @@ body {
   color: lightgreen;
 }
 .question-p {
+  width: 500px;
+  display: flex;
   border-radius: 20px;
   text-align: justify;
   pointer-events: fill;
   background: rgb(37, 24, 24);
   padding: 20px;
-  width: 100%;
-  max-width: 800px;
+  /* width: 100%; */
+  /* max-width: 5300px; */
   &:hover {
     /* color: darkred; */
     font-weight: bold;
@@ -164,7 +185,6 @@ body {
   }
 }
 
-/* pop up */
 #pop-up {
   position: absolute;
   top: 50%;
@@ -173,24 +193,63 @@ body {
   height: 100%;
   width: 100%;
   background: rgba(0, 0, 0, 0.836);
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* Optional: Shadow effect */
-  text-align: center; /* Center the text */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
   place-content: center;
   visibility: hidden;
   pointer-events: none;
 }
-/* Small devices (phones) */
-/* @media (max-width: 576px) {
-} */
 
-/* Medium devices (tablets) */
-/* @media (min-width: 577px) and (max-width: 768px) {
-} */
+#add-obj {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #2c5364;
+  width: 100%;
+  width: 100%;
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  visibility: hidden;
+}
 
-/* Large devices (laptops) */
-/* @media (min-width: 769px) and (max-width: 1024px) {
-} */
+#add-obj-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
 
-/* Extra-large devices (desktops, 4K) */
-/* @media (min-width: 1025px) {
-} */
+#add-obj-form input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  pointer-events: fill;
+}
+
+#add-obj-form input[type="text"]:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+#add-obj-form input[type="submit"] {
+  pointer-events: fill;
+  background: #007bff;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+#add-obj-form input[type="submit"]:hover {
+  background: #0056b3;
+}
