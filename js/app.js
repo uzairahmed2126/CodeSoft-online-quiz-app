@@ -1,10 +1,39 @@
-let limit = 5;
+// get id and classes
+const bodyContainer = document.body;
+const landingPage = document.getElementById("main-container");
+const addBtn = document.getElementById("create");
+const takeAQuizBtn = document.getElementById("take-quiz");
+const formClass = document.querySelector(".form");
+const questionP = document.querySelectorAll(".question-p");
+const closeBtn = document.querySelector(".fa-close");
+const objectClass = document.querySelector(".object");
+const questionContainer = document.getElementById("question-container");
+const popUp = document.getElementById("pop-up");
+const optQuestion = document.getElementById("get-question");
+const optA = document.getElementById("opt-a");
+const optB = document.getElementById("opt-b");
+const optC = document.getElementById("opt-c");
+const optD = document.getElementById("opt-d");
+const correctOpt = document.getElementById("correct-opt");
+const question = document.querySelector(".question");
+// global variables
+let limit = 10;
+let closeBtnStyle =
+  "font-size: 38px;margin: 40px;left: 80%;position: relative;color: darkred;cursor: pointer;";
+let index = 0;
+let quizData = [];
+let count = 1;
+let score = 0;
+let abcd = ["a", "b", "c", "d"];
+
+// fetch data from API
 async function fetchData() {
   try {
     const response = await fetch(
       `https://quizapi.io/api/v1/questions?apiKey=NFbXqVAcMrioUysvqBpFNWQpdVMNSFS1t1NHTvL6&limit=${limit}`
     );
     const data = await response.json();
+    quizData = [...quizData, ...data];
     showQuestions(data.length, data);
     if (!response.ok) {
       throw new Error(`HTTP error! Status:${response.status}`);
@@ -14,29 +43,7 @@ async function fetchData() {
     throw new Error("Error fetching data:", error);
   }
 }
-const landingPage = document.getElementById("main-container");
-const addBtn = document.getElementById("create");
-const takeAQuizBtn = document.getElementById("take-quiz");
-const formClass = document.querySelector(".form");
-const closeBtn = document.querySelector(".fa-close");
-const bodyContainer = document.body;
-const questionContainer = document.getElementById("question-container");
-const popUp = document.getElementById("pop-up");
-const questionP = document.querySelectorAll(".question-p");
-const objectClass = document.querySelector(".object");
-const optQuestion = document.getElementById("get-question");
-const optA = document.getElementById("opt-a");
-const optB = document.getElementById("opt-b");
-const optC = document.getElementById("opt-c");
-const optD = document.getElementById("opt-d");
-const correctOpt = document.getElementById("correct-opt");
-let closeBtnStyle =
-  "font-size: 38px;margin: 40px;left: 90%;position: relative;color: darkred;cursor: pointer;pointer-events: all;";
-let index = 0;
-let quizData = [];
-let count = 1;
-let score = 0;
-let abcd = ["a", "b", "c", "d"];
+// question counter handler
 function counter() {
   if (count === quizData.length) {
     count = 1;
@@ -45,17 +52,11 @@ function counter() {
   }
   return count;
 }
-// function dataHandle() {
-//   let val = "true";
 
-// }
 function showQuestions(dataLength, values) {
   quizData = values;
   console.log(quizData);
-  // console.log(quizData[index].correct_answers);
-  // console.log(dataLength, values[index].correct_answers.answer_a_correct);
-
-  return (questionContainer.innerHTML = `<div id="question-number">question ${count}/${dataLength}</div>
+  return (questionContainer.innerHTML = `<div id="question-number"><p>question</p> <h4>${count}/${dataLength}</h4></div>
       <div id="questions">
         <p class="question">${values[index].question}</p>
         ${abcd
@@ -68,10 +69,8 @@ function showQuestions(dataLength, values) {
           })
           .join("")}</div>`);
 }
+// score popup
 function popUpForScore() {
-  // questionP.forEach((item) => {
-  //   item.style.pointerEvents = "none";
-  // });
   questionContainer.style.pointerEvents = "none";
   closeBtn.style.zIndex = "1";
   popUp.style.visibility = "visible";
@@ -85,8 +84,6 @@ function popUpForScore() {
 }
 function nexQuestion() {
   if (index < quizData.length) {
-    // counter;
-    // count++;
     showQuestions(quizData.length, quizData);
   } else {
     popUpForScore();
@@ -98,30 +95,31 @@ function visibilityHandleOfLandingPage(alive) {
 }
 function handleClickBtn(e) {
   const event = e.target;
-  if (event.id === "create") {
+  const eventId = event.id;
+  const eventClass = event.className;
+  if (eventId === "create") {
     closeBtn.style = closeBtnStyle;
     closeBtn.style.visibility = "visible";
     formClass.classList.add("form-class");
     objectClass.style.visibility = "visible";
     visibilityHandleOfLandingPage("none");
-  } else if (event.id === "take-quiz") {
-    if (index < quizData.length) {
-      // counter;
-      // count++;
-      showQuestions(quizData.length, quizData);
-    }
+  } else if (eventId === "take-quiz") {
+    // if (index < quizData.length) {
+    //   showQuestions(quizData.length, quizData);
+    // }
     score = 0;
     index = 0;
+    questionP.forEach((item) => (item.style.pointerEvents = "auto"));
     visibilityHandleOfLandingPage("none");
     landingPage.style.height = "0";
-    questionP.forEach((item) => (item.style.pointerEvents = "fill"));
     questionContainer.style.width = "0";
     landingPage.style.visibility = "hidden";
     closeBtn.style = closeBtnStyle;
     closeBtn.style.visibility = "visible";
     formClass.classList.add("form-class");
     questionContainer.style.visibility = "visible";
-  } else if (event.className === "fa fa-close") {
+    fetchData();
+  } else if (eventClass === "fa fa-close") {
     score = 0;
     index = 0;
     objectClass.style.visibility = "hidden";
@@ -147,18 +145,11 @@ function handleClickBtn(e) {
     counter();
     nexQuestion();
     console.log(score);
-  } else if (event.id === "submit") {
-    // let val = "";
-    // console.log(correctOpt.value)
-    // abcd.forEach((item) => {
-    //   correctOpt.value.toLowerCase() === item
-    //     ? (val = "true")
-    //     : (val = "false");
-    // });
-
+  } else if (eventId === "submit") {
     limit += 1;
     index++;
-    quizData.unshift({
+
+    let newQuestion = {
       question: optQuestion.value,
       answers: {
         answer_a: optA.value,
@@ -176,19 +167,34 @@ function handleClickBtn(e) {
         answer_d_correct:
           correctOpt.value.toLowerCase() === "d" ? "true" : "false",
       },
-    });
+    };
+
+    // add new question into existing array
+    quizData.unshift(newQuestion);
+
+    // add whole array into LocalStorage
+    localStorage.setItem("quizData", JSON.stringify(quizData));
+
+    console.log("New Question Added:", newQuestion);
+
+    // reset the input values
     optQuestion.value = "";
     optA.value = "";
     optB.value = "";
     optC.value = "";
     optD.value = "";
     correctOpt.value = "";
-    console.log(quizData);
-    console.log(event.id);
-    alert("Data is submited");
+
+    alert("Question added successfully!");
   }
   console.log(event);
 }
-fetchData();
+if (window.innerWidth <= 480) {
+  closeBtnStyle = "";
+} else if (window.innerWidth > 480) {
+  closeBtnStyle = closeBtnStyle;
+}
+
+// fetchData();
 // events
 document.body.addEventListener("click", handleClickBtn);
