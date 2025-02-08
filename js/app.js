@@ -109,8 +109,13 @@ function handleClickBtn(e) {
     // }
     score = 0;
     index = 0;
-    questionP.forEach((item) => (item.style.pointerEvents = "auto"));
+    let storedData = JSON.parse(localStorage.getItem("quizData"));
+    if (storedData) {
+      quizData = storedData;
+      showQuestions(quizData.length, quizData);
+    }
     visibilityHandleOfLandingPage("none");
+    questionP.forEach((item) => (item.style.color = "yellow"));
     landingPage.style.height = "0";
     questionContainer.style.width = "0";
     landingPage.style.visibility = "hidden";
@@ -118,7 +123,6 @@ function handleClickBtn(e) {
     closeBtn.style.visibility = "visible";
     formClass.classList.add("form-class");
     questionContainer.style.visibility = "visible";
-    fetchData();
   } else if (eventClass === "fa fa-close") {
     score = 0;
     index = 0;
@@ -145,6 +149,16 @@ function handleClickBtn(e) {
     counter();
     nexQuestion();
     console.log(score);
+  }
+  if (
+    eventId === "submit" &&
+    (optQuestion.value === "" ||
+      optA.value === "" ||
+      optB.value === "" ||
+      optC.value === "" ||
+      optD.value === "")
+  ) {
+    
   } else if (eventId === "submit") {
     limit += 1;
     index++;
@@ -184,8 +198,8 @@ function handleClickBtn(e) {
     optC.value = "";
     optD.value = "";
     correctOpt.value = "";
-
-    alert("Question added successfully!");
+  } else if (popUp.style.visibility === "visible") {
+    questionP.forEach((item) => (item.style.pointerEvents = "none"));
   }
   console.log(event);
 }
@@ -194,7 +208,20 @@ if (window.innerWidth <= 480) {
 } else if (window.innerWidth > 480) {
   closeBtnStyle = closeBtnStyle;
 }
-
+fetchData();
 // fetchData();
 // events
 document.body.addEventListener("click", handleClickBtn);
+const dialog = document.querySelector("dialog");
+const showButton = document.querySelector("dialog + button");
+const closeButton = document.querySelector("dialog button");
+
+// "Show the dialog" button opens the dialog modally
+showButton.addEventListener("click", () => {
+  dialog.showModal();
+});
+
+// "Close" button closes the dialog
+closeButton.addEventListener("click", () => {
+  dialog.close();
+});

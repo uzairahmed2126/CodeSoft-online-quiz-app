@@ -11,17 +11,18 @@ body {
   font-variation-settings: "XROT" 0, "YROT" 0;
   text-transform: capitalize;
   pointer-events: none;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 #main-container {
   height: 100vh;
   width: 100%;
-  background: linear-gradient(160deg, #0f2027, #203a43, #2c5364);
+  background: linear-gradient(160deg, #132329, #194e5f, #058ec9);
   display: flex;
   flex-direction: column;
   justify-content: center;
   text-align: center;
   align-items: center;
+  animation: mainContainer 2s ease-in-out alternate;
 }
 #main-container h1 {
   font-size: 50px;
@@ -110,19 +111,21 @@ body {
   align-items: center;
 }
 .question {
-  height: 50px;
+  height: 80px;
   width: 100%;
   align-items: center;
   place-content: center;
   font-size: 20px;
-  margin: 25px 0 25px 0;
+  margin: 0;
+  /* margin: 25px 0 25px 0; */
   /* width: 100%;
   max-width: 500px; */
 }
 #question-number {
+  margin: -50px 0 10px 0;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 4px;
   place-content: center;
   align-items: center;
   text-align: center;
@@ -293,10 +296,41 @@ body {
     box-shadow: 0px 0px 30px rgb(182, 56, 56);
   }
 }
+@keyframes mainContainer {
+  0% {
+    background: linear-gradient(160deg, #194e5f, #132329, #058ec9);
+    transform: matrix3d(
+      -0,
+      -1,
+      2,
+      0,
+      -0.6,
+      -1,
+      0.2,
+      0,
+      -0.5,
+      -0.8,
+      0.7,
+      0,
+      1,
+      1,
+      0,
+      1
+    );
+  }
+  50% {
+    background: radial-gradient(360deg, #194e5e, #232329, #058ecf);
+  }
+  100% {
+    background: radial-gradient(160deg, #194e5d, #13232a, #058eca);
+  }
+}
 /* responsive */
 @media screen and (max-width: 480px) {
   #main-container {
-    height: 150vh;
+    height: 100vh;
+    /* max-height: 10%; */
+    width: 100%;
   }
 
   #main-container h1 {
@@ -450,4 +484,18 @@ body {
     visibility: hidden;
     pointer-events: none;
   }
+}
+/*  */
+::backdrop {
+  background-image: linear-gradient(
+    45deg,
+    magenta,
+    rebeccapurple,
+    dodgerblue,
+    green
+  );
+  opacity: 0.75;
+}
+button {
+  pointer-events: auto;
 }
