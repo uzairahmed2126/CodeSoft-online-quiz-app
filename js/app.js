@@ -16,6 +16,8 @@ const optC = document.getElementById("opt-c");
 const optD = document.getElementById("opt-d");
 const correctOpt = document.getElementById("correct-opt");
 const question = document.querySelector(".question");
+const timerId = document.getElementById("timer");
+
 // global variables
 let limit = 10;
 let closeBtnStyle =
@@ -25,6 +27,8 @@ let quizData = [];
 let count = 1;
 let score = 0;
 let abcd = ["a", "b", "c", "d"];
+let time = 60;
+let countDown;
 
 // fetch data from API
 async function fetchData() {
@@ -52,10 +56,8 @@ function counter() {
   }
   return count;
 }
-
 function showQuestions(dataLength, values) {
   quizData = values;
-  console.log(quizData);
   return (questionContainer.innerHTML = `<div id="question-number"><p>question</p> <h4>${count}/${dataLength}</h4></div>
       <div id="questions">
         <p class="question">${values[index].question}</p>
@@ -80,6 +82,7 @@ function popUpForScore() {
       : `
     <h1 style="color:green;">Score :${score}</h1>`
   }`;
+  clearInterval(countDown);
   return popUp;
 }
 function nexQuestion() {
@@ -104,9 +107,22 @@ function handleClickBtn(e) {
     objectClass.style.visibility = "visible";
     visibilityHandleOfLandingPage("none");
   } else if (eventId === "take-quiz") {
-    // if (index < quizData.length) {
-    //   showQuestions(quizData.length, quizData);
-    // }
+    countDown = setInterval(() => {
+      timerId.textContent = time;
+      if (time !== 0) {
+        time--;
+      } else {
+        clearInterval(countDown);
+        timerId.textContent = "time up!";
+        timerId.style.background = "darkred";
+        questionContainer.children.questions.style.visibility = "hidden";
+        time = 60;
+        popUpForScore();
+      }
+    }, 1000);
+    timerId.style.visibility = "visible";
+    timerId.style.background = "";
+    timerId.textContent = "";
     score = 0;
     index = 0;
     let storedData = JSON.parse(localStorage.getItem("quizData"));
@@ -115,7 +131,6 @@ function handleClickBtn(e) {
       showQuestions(quizData.length, quizData);
     }
     visibilityHandleOfLandingPage("none");
-    questionP.forEach((item) => (item.style.color = "yellow"));
     landingPage.style.height = "0";
     questionContainer.style.width = "0";
     landingPage.style.visibility = "hidden";
@@ -124,19 +139,27 @@ function handleClickBtn(e) {
     formClass.classList.add("form-class");
     questionContainer.style.visibility = "visible";
   } else if (eventClass === "fa fa-close") {
+    // reset the variables
     score = 0;
     index = 0;
-    objectClass.style.visibility = "hidden";
+    time = 60;
+    // function calling
+    nexQuestion();
     visibilityHandleOfLandingPage("visible");
+    clearInterval(countDown);
+    // visiblity
+    timerId.style.visibility = "hidden";
+    objectClass.style.visibility = "hidden";
+    questionContainer.style.visibility = "hidden";
+    popUp.style.visibility = "hidden";
+    landingPage.style.visibility = "visible";
+    // styling
+    closeBtn.style = "font-size: 0px;margin: 0px;";
     landingPage.style.height = "";
     questionContainer.style.width = "";
-    landingPage.style.visibility = "visible";
-    questionContainer.style.visibility = "hidden";
-    closeBtn.style = "font-size: 0px;margin: 0px;";
+    // clsslist
     formClass.classList.remove("form-class");
-    popUp.style.visibility = "hidden";
   } else if (event.classList.contains("question-p")) {
-    console.log(event.previousElementSibling.innerText);
     let selectedAnswer = event.previousElementSibling.innerText
       .trim()
       .toLowerCase(event.previousElementSibling);
@@ -148,19 +171,17 @@ function handleClickBtn(e) {
     index++;
     counter();
     nexQuestion();
-    console.log(score);
-  }
-  if (
-    eventId === "submit" &&
-    (optQuestion.value === "" ||
-      optA.value === "" ||
-      optB.value === "" ||
-      optC.value === "" ||
-      optD.value === "")
-  ) {
-    
   } else if (eventId === "submit") {
-    limit += 1;
+    if (
+      optQuestion.value !== "" ||
+      optA.value !== "" ||
+      optB.value !== "" ||
+      optC.value !== "" ||
+      optD.value !== ""
+    ) {
+      limit += 1;
+    }
+
     index++;
 
     let newQuestion = {
@@ -189,8 +210,6 @@ function handleClickBtn(e) {
     // add whole array into LocalStorage
     localStorage.setItem("quizData", JSON.stringify(quizData));
 
-    console.log("New Question Added:", newQuestion);
-
     // reset the input values
     optQuestion.value = "";
     optA.value = "";
@@ -201,7 +220,6 @@ function handleClickBtn(e) {
   } else if (popUp.style.visibility === "visible") {
     questionP.forEach((item) => (item.style.pointerEvents = "none"));
   }
-  console.log(event);
 }
 if (window.innerWidth <= 480) {
   closeBtnStyle = "";
@@ -209,19 +227,5 @@ if (window.innerWidth <= 480) {
   closeBtnStyle = closeBtnStyle;
 }
 fetchData();
-// fetchData();
 // events
 document.body.addEventListener("click", handleClickBtn);
-const dialog = document.querySelector("dialog");
-const showButton = document.querySelector("dialog + button");
-const closeButton = document.querySelector("dialog button");
-
-// "Show the dialog" button opens the dialog modally
-showButton.addEventListener("click", () => {
-  dialog.showModal();
-});
-
-// "Close" button closes the dialog
-closeButton.addEventListener("click", () => {
-  dialog.close();
-});

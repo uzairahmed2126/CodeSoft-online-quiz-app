@@ -1,0 +1,76 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="timer">
+      <form id="form" action="#">
+        <input
+          id="minute"
+          type="number"
+          placeholder="minutes"
+          min="1"
+          max="5"
+        />
+        <input
+          id="second"
+          type="number"
+          placeholder="seconds"
+          min="1"
+          max="60"
+        />
+        <input id="submit" type="submit" />
+      </form>
+    </div>
+    <div id="show-time">
+      <p id="show-min"></p>
+      <p id="show-sec"></p>
+    </div>
+  </body>
+  <script>
+    const minute = document.getElementById("minute");
+    const second = document.getElementById("second");
+    const formSubmit = document.getElementById("form");
+    const timerId = document.getElementById("timer");
+    const showTime = document.getElementById("show-time");
+    const showMin = document.getElementById("show-min");
+    const showSec = document.getElementById("show-sec");
+    let min = 0;
+    let sec = 0;
+    console.log(min);
+    function handleForm(e) {
+      console.log(e);
+      e.preventDefault();
+      setInterval(() => {
+        if (+minute.value >= min) {
+          sec++;
+          showSec.textContent = "sec:" + sec + " ";
+          if (sec === 60) {
+            sec = 0;
+          }
+        }
+        if (sec === 60) {
+          min++;
+          showMin.textContent = "min:" + min;
+        }
+        //   timerId.textContent = time;
+        //   if (time !== 1) {
+        //     time--;
+        //   } else {
+        //     timerId.textContent = "time up!";
+        //   }
+      }, 1000);
+      //   console.log(minute.value, second.value);
+    }
+    if (+minute.value === 1) {
+      clearInterval();
+    }
+    // let time = 0;
+    // timerId.style.visibility = "visible";
+
+    formSubmit.addEventListener("submit", handleForm);
+  </script>
+</html> -->
